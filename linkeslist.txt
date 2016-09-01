@@ -1,0 +1,133 @@
+
+Given two linked list, you have to check whether the first one is present in 2nd one or not?
+
+list1:    1->2->3->4->2->3
+list2:    1->2->1->2->3->4->2->3->5->6
+
+Output- 1
+
+list1:    1->2->3->4->2->3
+list2:    2->1->2->4->2->3->5->6
+
+Output- 0
+
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+ 
+// A linked list node
+struct node
+{
+int data;
+struct node *next;
+};
+ 
+int isEmpty(struct node *root)
+{
+    return !root;
+}
+/* Given a reference (pointer to pointer) to the head of a list and 
+an int, inserts a new node on the front of the list. */
+void push(struct node** head_ref, int new_data)
+{
+    /* 1. allocate node */
+    struct node* new_node = (struct node*) malloc(sizeof(struct node));
+ 
+    /* 2. put in the data */
+    new_node->data = new_data;
+ 
+    /* 3. Make next of new node as head */
+    new_node->next = (*head_ref);
+ 
+    /* 4. move the head to point to the new node */
+    (*head_ref) = new_node;
+}
+ 
+int pop(struct node** root)
+{
+    if (isEmpty(*root))
+        return 0;
+    struct node* temp = *root;
+    *root = (*root)->next;
+    int popped = temp->data;
+    free(temp);
+  
+    return popped;
+}
+  
+// This function prints contents of linked list starting from head
+void printList(struct node *node)
+{
+while (node != NULL)
+{
+    printf(" %d ", node->data);
+    node = node->next;
+}
+}
+ 
+/* Drier program to test above functions*/
+int main()
+{
+/* Start with the empty list */
+struct node* head = NULL;
+push(&head, 3);
+push(&head, 2);
+push(&head, 4);
+push(&head, 3);
+push(&head, 2);
+push(&head, 1);
+ 
+ 
+ 
+ 
+ 
+printf("\n Created first  Linked list is: ");
+printList(head);
+ 
+struct node* head1 = NULL;
+push(&head1, 6);
+push(&head1, 5);
+push(&head1, 3);
+push(&head1, 2);
+push(&head1, 4);
+push(&head1, 3);
+push(&head1, 1);
+push(&head1, 2);
+push(&head1, 1);
+printf("\n Created second  Linked list is: ");
+printList(head1);
+ 
+int x=pop(&head);
+ 
+int t=pop(&head1);
+int ans;
+while(true)
+{
+    if(x==t)
+     {
+         x=pop(&head);
+         t= pop(&head1);
+          
+     }
+    else if(t==0)
+     {
+         ans=0;
+        break;
+          
+     }
+     else if(x==0)
+     {
+         ans=1;
+         break;
+     }
+     else
+    t= pop(&head1);
+ 
+}
+ 
+printf("\n answer :%d",ans);
+return 0;
+}
