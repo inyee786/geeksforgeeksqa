@@ -1,0 +1,89 @@
+print the number of  unique prime factor of number
+
+import java.util.HashSet;
+import java.util.Random; 
+import java.util.Scanner; import java.util.Set;
+/** * Java program to print prime factors of a number. For example if input is 15, * then it should print 3 and 5, similarly if input is 30, then it should * display 2, 3 and 5. * * @author Javin Paul */
+public class PrimeFactors
+{
+    public static void main(String args[]) 
+    {
+        
+        long q,n,i;
+ 
+      Scanner in = new Scanner(System.in);
+        q = in.nextLong();
+        for(i=0;i<q;i++)
+        {n = in.nextLong();
+          int l=primeFactors(n).size();
+        System.out.println(l);
+        }    
+             
+    }
+        
+        
+    /** * @return prime factors of a positive integer in Java. * @input 40 * @output 2, 5 */
+    public static Set<Integer> primeFactors(long number) 
+    {    
+        Set<Integer> primefactors = new HashSet<>(); 
+        long copyOfInput = number;
+        for (int i = 2; i <= copyOfInput; i++)
+        {
+            if (copyOfInput % i == 0) 
+            { 
+                primefactors.add(i); // prime factor
+                copyOfInput /= i; 
+                i--; 
+                
+            } 
+        }//System.out.println(count);
+        return primefactors; } 
+} 
+
+
+
+count all the unoque factor
+
+print the number of  unique prime factor of number
+
+import java.util.HashSet;
+import java.util.Random; 
+import java.util.Scanner; import java.util.Set;
+/** * Java program to print prime factors of a number. For example if input is 15, * then it should print 3 and 5, similarly if input is 30, then it should * display 2, 3 and 5. * * @author Javin Paul */
+public class PrimeFactors
+{
+    public static void main(String args[]) 
+    {
+        
+        long q,n,i;
+ 
+      Scanner in = new Scanner(System.in);
+        q = in.nextLong();
+        for(i=0;i<q;i++)
+        {n = in.nextLong();
+          int l=primeFactors(n).size();
+        System.out.println(l);
+        }    
+             
+    }
+        
+        
+    /** * @return prime factors of a positive integer in Java. * @input 40 * @output 2, 5 */
+    public static List<Integer> primeFactors(long number) 
+    {    
+        List<Integer> primefactors = new HashSet<>(); 
+        long copyOfInput = number;
+        for (int i = 2; i <= copyOfInput; i++)
+        {
+            if (copyOfInput % i == 0) 
+            { 
+                primefactors.add(i); // prime factor
+                copyOfInput /= i; 
+                i--; 
+                
+            } 
+        }//System.out.println(count);
+        return primefactors; } 
+} 
+
+
