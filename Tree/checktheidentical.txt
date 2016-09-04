@@ -1,0 +1,100 @@
+Code to Determine if Two Trees are Identical
+
+Algorithm:
+
+sameTree(tree1, tree2)
+1. If both trees are empty then return 1.
+2. Else If both trees are non -empty
+     (a) Check data of the root nodes (tree1->data ==  tree2->data)
+     (b) Check left subtrees recursively  i.e., call sameTree( 
+          tree1->left_subtree, tree2->left_subtree)
+     (c) Check right subtrees recursively  i.e., call sameTree( 
+          tree1->right_subtree, tree2->right_subtree)
+     (d) If a,b and c are true then return 1.
+3  Else return 0 (one is empty and other is not)
+
+
+Output:
+
+inorder traversal of tree1 : 4 2 5 1 3 
+inorder traversal of tree2 : 4 2 5 1 3 
+both tree are identical
+
+c++  code
+
+#include <stdio.h>
+#include<stdlib.h>
+
+struct node
+{
+	int data;
+	struct node *left;
+	struct node *right;
+};
+
+struct node *newnode(int data)
+{
+	struct node *newNode=(struct node*)malloc(sizeof(struct node));
+	newNode->data=data;
+	newNode->left=NULL;
+	newNode->right=NULL;
+	return(newNode);
+}
+void inorder(struct node *n)
+{
+	if(n==NULL)
+	return;
+
+	inorder(n->left);
+	printf("%d ",n->data);
+	inorder(n->right);
+}
+
+int check(struct node *n1,struct node *n2)
+{
+ if(n1==NULL&&n2==NULL)
+ {
+ 	return 1;
+ }
+ else
+ {
+ return(n1->data==n2->data&&
+            check(n1->left,n2->left)&&
+                      check(n1->right,n2->right));
+ }
+ return 0;
+ }
+
+
+int main(void) {
+	
+	struct node *head=newnode(1);
+	struct node *head1=newnode(1);
+	
+	head->left=newnode(2);
+	head->right=newnode(3);
+	head->left->left=newnode(4);
+	head->left->right=newnode(5);
+	
+	
+	
+	
+	head1->left=newnode(2);
+	head1->right=newnode(3);
+	head1->left->left=newnode(4);
+	head1->left->right=newnode(5);
+	
+	printf("inorder traversal of tree1 : ");
+	inorder(head);
+	
+	printf("\ninorder traversal of tree2 : ");
+	inorder(head1);
+	
+	
+	if(check(head,head1))
+	printf("\nboth tree are identical");
+	else 
+	printf("\nboth tree are not identical");
+	
+	return 0;
+}
