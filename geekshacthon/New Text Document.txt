@@ -1,0 +1,132 @@
+Homework in Fest
+
+
+Sanya and her father went to Delhi Circus Fest. There, her father saw a shooting game and he loves shooting. Also, Sanya's recent performance in maths was not good and her teacher had suggested her father to help her practice maths in any possible way he can.
+This was a very good oportunity for her father to improve her calculation so he played the shooting game in which there was a board having R co-centric rings (having same center) centered at (0,0) and a gun. He has to shoot the rings in order to get points. The outer most ring i.e. the largest radii ring is considered the first ring. 
+The rules of the shooting games were:
+
+(i) Hitting the smallest ring will add R points to the score.
+(ii) If the bullet lands in between the ith ring and (i+1)th ring then i points will be added to the score. 
+(iii) If the bullet lands on the boundary of ith ring then i points will be added to the score.
+(iv) If the bullet lands outside the score board i.e. outside the ring with largest radii, 0 points will be given.
+
+Sanya's father noted down N coordinates (xi, yi) on a piece of paper where his bullet striked and told his daughter to calculate his score based on the above rules. The task is to tell the score that Sanya must calculate correctly.
+
+Input:
+The first line of the input contains an integer T denoting the number of test cases. Then T test cases follow. Each test case consists of three lines. First line of each test case contains two space-separated integers R and N denoting the number of rings and number of coordinates respectively. The second line of each test case contains R space-separated integers denoting the radii of the ith ring ie r1, r2, r3....rR.
+Third line of each test case contains (2*N) space separated integers denoting N pairs, where each pair represents x and y coordinates where the bullet striked.
+
+Output:
+Corresponding to each test case, print the desired output in a new line.
+
+Example
+Input:
+1
+5 6
+10 8 6 4 2
+0 0 1 1 2 2 3 3 4 4 5 5
+
+Output:
+22
+
+Constraints:
+1<=T<=1000
+1 <= R <= 10 ^ 3
+1 <= ri <=10^4
+1 <= N <= 10 ^ 5
+1 <= |xi|,|yi| <=10 ^ 4
+
+Example:
+In the above example the points that Sanya's father will get are:
+0 0 -> 5 points
+1 1 -> 5 points
+2 2 -> 4 points
+3 3 -> 3 points
+4 4 -> 3 points
+5 5 -> 2 points
+Total score Sanya's father gets is 5+5+4+3+3+2 = 22 
+
+c program
+
+
+
+#include <stdio.h>
+#include<math.h>
+//function to search and perform summation
+long search(long n,long a[],long s)
+{
+long x=s,sum=0,i;
+
+	
+	for(i=0;i<s;i++)
+	{
+       if(n>a[0])
+	      {
+	      	sum=sum+0;
+	      	break;
+	      }
+	      else if(n<a[s])
+	{
+		       sum=sum+5;
+	           break;
+	}
+	else if(n<a[i] && n>a[i+1])
+	{
+	      sum=sum+x-i-1;
+	      break;
+	}
+	else if(n==a[i])
+	{
+		sum=sum+i+x;
+	    break;
+	}
+	
+	    
+	}
+	
+	return sum;
+}
+    
+
+//calculate the power square of X and Y
+long power(long x, long y)
+{
+    if( y == 0)
+        return 1;
+    else if (y%2 == 0)
+        return power(x, y/2)*power(x, y/2);
+    else
+        return x*power(x, y/2)*power(x, y/2);
+ 
+}
+
+int main() {
+	
+	long t,i,j,x,y,n,r,sum=0;
+	scanf("%ld",&t);
+	for(i=0;i<t;i++)
+	{
+	    scanf("%ld",&r);
+	    scanf("%ld",&n);
+	    long ri[r];
+	  
+	    for(j=0;j<r;j++)
+	    scanf("%ld",&ri[j]);
+	    
+	   
+	    for(j=0;j<n;j++)
+	    {
+	        scanf("%ld",&x);
+	        scanf("%ld",&y);
+	       
+	       
+	       long sq=power(x,2)+power(y,2);
+	       long e=sqrt(sq);
+	       
+	       sum=sum+search(e,ri,r);
+	    }
+	    
+	printf("%ld",sum);
+	}
+	return 0;
+}
