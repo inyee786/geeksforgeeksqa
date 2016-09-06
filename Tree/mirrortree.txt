@@ -1,0 +1,73 @@
+Convert a Binary Tree into its Mirror Tree
+
+Algorithm – Mirror(tree):
+
+(1)  Call Mirror for left-subtree    i.e., Mirror(left-subtree)
+(2)  Call Mirror for right-subtree  i.e., Mirror(right-subtree)
+(3)  Swap left and right subtrees.
+          temp = left-subtree
+          left-subtree = right-subtree
+          right-subtree = temp
+
+
+c code:
+#include <stdio.h>
+#include<stdlib.h>
+
+
+struct node
+{
+	int data;
+	struct node *left;
+	struct node *right;
+};
+
+struct node *insert(int data)
+{
+	struct node * newNode=(struct node*)malloc(sizeof(struct node));
+	newNode->data=data;
+	newNode->left=NULL;
+	newNode->right=NULL;
+ return newNode;
+}
+void mirror(struct node *ne)
+{
+	if(ne==NULL)
+	return;
+	struct node *temp;
+	mirror(ne->left);
+	mirror(ne->right);
+	
+	temp=ne->left;
+	ne->left=ne->right;
+	ne->right=temp;
+}
+void inorder(struct node *st)
+{ if(st==NULL)
+        return;
+
+	inorder(st->left);
+	printf("%d ",st->data);
+	inorder(st->right);
+}
+
+int main(void) {
+	struct node *root=insert(1);
+	root->left=insert(2);
+	root->right=insert(3);
+	root->left->left=insert(4);
+	root->left->right=insert(5);
+	
+	printf("inorder trvaersal of tree\n");
+	inorder(root);
+	
+	mirror(root);
+	
+	printf("\ninorder traversal of the mirror tree\n");
+	inorder(root);
+	
+	
+	
+	
+	return 0;
+}
