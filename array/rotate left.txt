@@ -1,0 +1,74 @@
+John Watson performs an operation called a right circular rotation on an array of integers, . After performing one right circular rotation operation, the array is transformed from  to .
+
+Watson performs this operation  times. To test Sherlock's ability to identify the current element at a particular position in the rotated array, Watson asks  queries, where each query consists of a single integer, , for which you must print the element at index  in the rotated array (i.e., the value of ).
+
+Input Format
+
+The first line contains  space-separated integers, , , and , respectively. 
+The second line contains  space-separated integers, where each integer  describes array element  (where ). 
+Each of the  subsequent lines contains a single integer denoting .
+
+
+
+a= 1 2 3 4
+r= 2
+rotate array = 3 4 1 2
+
+
+
+
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+/*
+public static void main(String[] args) {
+    Scanner in=new Scanner(System.in);
+    int N=in.nextInt();
+    int K=in.nextInt();
+    int Q=in.nextInt();
+    
+    int[] arr=new int[N];
+
+    for(int i=0;i<N;i++)
+        arr[i]=in.nextInt();
+
+   for(int i=0;i<Q;i++)
+       {
+           int idx=in.nextInt();
+           if(idx-rot>=0)
+              System.out.println(arr[idx-rot]);
+           else
+            System.out.println(arr[idx-rot+arr.length]);
+}
+*/
+
+int main() {
+    int n,r,q,i,x;
+    cin>>n>>r>>q;
+    int a[n];
+    int rot=r%n;
+    for(i=0;i<n;i++)
+        {
+        cin>>a[i];
+    }
+   
+    
+    
+
+    for(i=0;i<q;i++)
+        {
+        cin>>x;
+       if(x-rot>=0)
+        cout<<a[x-rot]<<"\n";
+        else
+            cout<<a[x-rot+n]<<"\n";
+    }
+    
+    
+    
+    return 0;
+}
